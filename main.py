@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database.mongo import ping_mongo
-from routes import auth, analyze_url, analyze_text
+from routes import auth, analyze_url, analyze_text, demo
 from utils.model_loader import model_loader
 import logging
 import uvicorn
+
 
 # Configure logging
 logging.basicConfig(
@@ -35,7 +36,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(analyze_url.router)
 app.include_router(analyze_text.router)
-
+app.include_router(demo.router)
 # Startup event
 @app.on_event("startup")
 async def startup_event():
